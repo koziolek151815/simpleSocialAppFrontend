@@ -1,28 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
-import React, { useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios, * as others from 'axios';
+import Post from "./Components/Post/Post";
 
 
 
 function App() {
-    const [data, setData] = useState([]);
+    const [posts, setPosts] = useState([]);
 
-    const fetchData = async () => {
-        const response = await axios.get('http://localhost:8081/posts');
-        setData(response.data);
-    }
+    useEffect(async () => {
+        const response = await axios(
+            'http://localhost:8081/posts',
+        );
+
+        setPosts(response.data);
+    }, []);
+
   return (
     <div className="App">
-        <div>
-            <button className="fetch-button" onClick={fetchData}>
-                Fetch Data
-            </button>
-        </div>
-        {data.map(data =>  <div style={{ display:'flex', alignItems: 'center', justifyContent:'center', flexDirection: 'column'}}  key = {data.id}>
-                <p>{data.id}</p>
-                <p>{data.text}</p>
-            </div>
+
+        {posts.map(post =>
+            <Post post = {post} key={post.id} />
         )}
     </div>
   );
