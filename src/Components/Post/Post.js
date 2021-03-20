@@ -12,9 +12,9 @@ function Post(props) {
             'http://localhost:8081/posts/' + props.post.id +'/comments',
         );
         setComments(response.data);
-        console.log('this' + comments)
-    }, []);
 
+        console.log(response.data);
+    }, []);
 
     return (
         <div className="App">
@@ -27,7 +27,6 @@ function Post(props) {
             {comments.map(comment =>
                 <Comment comment = {comment} key={comment.id} />
             )}
-
         </div>
     );
 }
