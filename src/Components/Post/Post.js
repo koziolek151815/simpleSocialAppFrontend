@@ -9,7 +9,7 @@ function Post(props) {
     const [comments, setComments] = useState([]);
     useEffect(async () => {
         const response = await axios(
-            'http://localhost:8081/posts/' + props.post.id +'/comments',
+            'http://localhost:8081/posts/' + props.post.id +'/comments', { headers: {"Authorization" : `Bearer ${props.token}`} }
         );
         setComments(response.data);
 

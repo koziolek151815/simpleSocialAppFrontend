@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import './LoginForm.css';
-
+import jwt from 'jwt-decode'
 import { withRouter } from "react-router-dom";
 import {API_BASE_URL} from "../Constants/apiConstants";
 
@@ -32,6 +32,11 @@ function LoginForm(props) {
                         ...prevState,
                         'successMessage' : 'Login successful. Redirecting to home page..'
                     }))
+                    localStorage.setItem("token", response.data['token']);
+                    console.log(localStorage.getItem("token"));
+                    const decoded = jwt(localStorage.getItem('token'));
+                    localStorage.setItem("roles", decoded['roles']);
+                    console.log(localStorage.getItem('roles'));
                     redirectToHome();
                     props.showError(null)
                 }

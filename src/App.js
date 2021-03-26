@@ -9,6 +9,7 @@ import RegistrationForm from "./Components/RegistrationForm/RegistrationForm";
 import LoginForm from "./Components/LoginForm/LoginForm";
 import MainPage from "./Components/MainPage/MainPage";
 import AlertComponent from "./Components/AlertComponent/AlertComponent";
+import PrivateRoute from "./Components/PrivateRoute";
 
 function App() {
     const [title, updateTitle] = useState(null);
@@ -28,9 +29,7 @@ function App() {
                         <Route path="/login">
                             <LoginForm showError={updateErrorMessage} updateTitle={updateTitle}/>
                         </Route>
-                        <Route path="/home">
-                            <MainPage/>
-                        </Route>
+                        <PrivateRoute path="/home" component={MainPage} />
                     </Switch>
                     <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
                 </div>

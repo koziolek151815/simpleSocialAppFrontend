@@ -4,10 +4,10 @@ import Post from "../Post/Post";
 
 function MainPage() {
     const [posts, setPosts] = useState([]);
-
+    const token = localStorage.getItem('token');
     useEffect(async () => {
-        const response = await axios(
-            'http://localhost:8081/posts',
+        const response = await axios.get(
+            'http://localhost:8081/posts', { headers: {"Authorization" : `Bearer ${token}`} }
         );
         console.log(response.data);
         setPosts(response.data);
@@ -16,7 +16,7 @@ function MainPage() {
     return (
         <div className="App">
             {posts.map(post =>
-                <Post post = {post} key={post.id} />
+                <Post post = {post} key={post.id} token={token} />
             )}
         </div>
     );
