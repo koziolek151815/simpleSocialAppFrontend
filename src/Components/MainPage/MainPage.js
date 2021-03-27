@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Post from "../Post/Post";
+import AddPost from "../AddPost/AddPost";
 
 function MainPage() {
     const [posts, setPosts] = useState([]);
@@ -18,6 +19,7 @@ function MainPage() {
             {posts.map(post =>
                 <Post post = {post} key={post.id} token={token} />
             )}
+            <AddPost></AddPost>
         </div>
     );
 }

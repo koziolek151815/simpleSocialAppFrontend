@@ -7,6 +7,8 @@ import Comment from "../Comment/Comment";
 
 function Post(props) {
     const [comments, setComments] = useState([]);
+    const [showComments,setShowComments] = useState(false);
+    const toggleShow = () => setShowComments(!showComments);
     useEffect(async () => {
         const response = await axios(
             'http://localhost:8081/posts/' + props.post.id +'/comments', { headers: {"Authorization" : `Bearer ${props.token}`} }
@@ -23,8 +25,11 @@ function Post(props) {
                 <br/>
                 <p> {props.post.text}</p>
                 <br/>
+                <button onClick={toggleShow}>
+                    {showComments? 'Hide comments':'Show comments'}
+                </button>
             </div>
-            {comments.map(comment =>
+            {showComments && comments.map(comment =>
                 <Comment comment = {comment} key={comment.id} />
             )}
         </div>
