@@ -19,7 +19,7 @@ function MainPage() {
             {posts.map(post =>
                 <Post post = {post} key={post.id} token={token} />
             )}
-            <AddPost></AddPost>
+            <AddPost setPosts={setPosts}  />
         </div>
     );
 }

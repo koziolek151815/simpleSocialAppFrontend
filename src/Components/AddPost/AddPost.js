@@ -2,18 +2,19 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 
 
-function AddPost() {
+function AddPost(props) {
     const [text, setText] = useState('');
     const token = localStorage.getItem('token');
     const handleChange = (event) => {
         setText(event.target.value);
     };
-    const sendPost = (event) => {
+    const sendPost = () => {
         axios.post('http://localhost:8081/posts', {
             text: text
         },{ headers: {"Authorization" : `Bearer ${token}`} })
             .then((response) => {
                 console.log(response);
+                props.setPosts(posts => [...posts, response.data]);
             }, (error) => {
                 console.log(error);
             });
