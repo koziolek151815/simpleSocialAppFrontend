@@ -16,6 +16,7 @@ function MainPage() {
 
     return (
         <div className="App">
+           <h2> Posts </h2>
             {posts.map(post =>
                 <Post post = {post} key={post.id} token={token} />
             )}

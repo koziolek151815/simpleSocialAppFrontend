@@ -9,6 +9,7 @@ function AlertComponent(props) {
         toggleDisplay('none');
         props.hideError(null);
     }
+
     useEffect(() => {
         if(props.errorMessage !== null) {
             openModal()
